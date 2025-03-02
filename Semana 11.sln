@@ -1,28 +1,131 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Semana_11", "Semana_11\Semana_11.csproj", "{207D6329-708C-4B72-B579-858175D8BA47}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tarea_Semana_11", "Tarea_Semana_11\Tarea_Semana_11.csproj", "{CAD84F27-380E-47D6-8907-CE7ABF54A64E}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{207D6329-708C-4B72-B579-858175D8BA47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{207D6329-708C-4B72-B579-858175D8BA47}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{207D6329-708C-4B72-B579-858175D8BA47}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{207D6329-708C-4B72-B579-858175D8BA47}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CAD84F27-380E-47D6-8907-CE7ABF54A64E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CAD84F27-380E-47D6-8907-CE7ABF54A64E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CAD84F27-380E-47D6-8907-CE7ABF54A64E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CAD84F27-380E-47D6-8907-CE7ABF54A64E}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-EndGlobal
+﻿// Tarea_semana_11.
+
+// Desarrolle un traductor básico de inglés español o español ingles.
+
+using System; // Importa el espacio de nombres System, que contiene clases básicas de .NET.
+using System.Collections.Generic; // Importa el espacio de nombres para utilizar colecciones genéricas como Dictionary.
+
+class Program // Define una clase llamada Program.
+{
+    static void Main() // Método principal que se ejecuta al iniciar el programa.
+    {
+        // Diccionario inicial con 19 palabras en inglés y su traducción al español
+        Dictionary<string, string> diccionario = new Dictionary<string, string>()
+        { //Agrega 19 palabras con su respectiva traducción
+        {"time", "tiempo"},
+        {"person", "persona"},
+        {"way", "camino"},
+        {"day", "dia"}, // no se utiliza la tilde
+        {"thing", "cosa"},
+        {"man", "hombre"},
+        {"world", "mundo"},
+        {"life", "vida"},
+        {"hand", "mano"},
+        {"part", "parte"},
+        {"eye", "ojo"},
+        {"woman", "mujer"},
+        {"place", "lugar"},
+        {"work", "trabajo"},
+        {"week", "semana"},
+        {"case", "caso"},
+        {"point", "punto"},
+        {"government", "gobierno"},
+        {"company", "empresa"} 
+        };
+
+        // Bucle principal del programa
+        while (true) // Inicia un bucle infinito.
+        {
+            // Mostrar el menú de opciones con separaciones para estética
+            Console.WriteLine("\nMENU");
+            Console.WriteLine("\n=======================================================");
+            Console.WriteLine("1. Traducir una frase");
+            Console.WriteLine("2. Ingresar mas palabras al diccionario");
+            Console.WriteLine("0. Salir");
+            Console.Write("\nSeleccione una opcion: ");
+            string opcion = Console.ReadLine(); // Leer la opción seleccionada por el usuario.
+
+            // Evaluar la opción seleccionada
+            switch (opcion) // Evalúa la opción seleccionada por el usuario.
+            {
+                case "1":
+                    TraducirFrase(diccionario); // Llama a la función para traducir una frase.
+                    break;
+                case "2":
+                    AgregarPalabra(diccionario); // Llama a la función para agregar una palabra al diccionario.
+                    break;
+                case "0":
+                    Console.WriteLine("Saliendo del programa..."); // Muestra un mensaje de salida.
+                    return; // Sale del programa.
+                default:
+                    Console.WriteLine("Opción no válida. Intente de nuevo."); // Muestra un mensaje para opciones no válidas.
+                    break;
+            }
+        }
+    }
+
+    // Función para traducir una frase
+    static void TraducirFrase(Dictionary<string, string> diccionario) // Define la función TraducirFrase que recibe un diccionario.
+    {
+        Console.Write("Ingrese la frase: ");
+        string frase = Console.ReadLine().ToLower(); // Lee la frase y la convierte a minúsculas.
+        string[] palabras = frase.Split(' '); // Divide la frase en un array de palabras.
+        string fraseTraducida = ""; // Declara una variable para almacenar la frase traducida.
+
+        // Recorrer cada palabra de la frase
+        foreach (string palabra in palabras) // Itera sobre cada palabra en la frase.
+        {
+            // Verificar si la palabra está en el diccionario (inglés -> español)
+            if (diccionario.ContainsKey(palabra)) // Verifica si la palabra está en el diccionario.
+            {
+                fraseTraducida += diccionario[palabra] + " "; // Traduce la palabra y la agrega a la frase traducida.
+            }
+            // Verificar si la palabra está en los valores del diccionario (español -> inglés)
+            else if (diccionario.ContainsValue(palabra)) // Verifica si la palabra está en los valores del diccionario.
+            {
+                // Buscar la clave (palabra en inglés) correspondiente al valor (palabra en español)
+                foreach (var item in diccionario) // Itera sobre cada par clave-valor en el diccionario.
+                {
+                    if (item.Value == palabra) // Verifica si el valor coincide con la palabra.
+                    {
+                        fraseTraducida += item.Key + " "; // Traduce la palabra y la agrega a la frase traducida.
+                        break; // Sale del bucle una vez encontrada la traducción.
+                    }
+                }
+            }
+            else
+            {
+                fraseTraducida += palabra + " "; // Mantiene la palabra original si no está en el diccionario.
+            }
+        }
+
+        // Mostrar la frase traducida (eliminando el espacio final con Trim())
+        Console.WriteLine("Su frase traducida es: " + fraseTraducida.Trim()); // Muestra la frase traducida.
+    }
+
+    // Función para agregar una nueva palabra al diccionario
+    static void AgregarPalabra(Dictionary<string, string> diccionario) // Define la función AgregarPalabra que recibe un diccionario.
+    {
+        Console.Write("Ingrese la palabra en inglés: ");
+        string palabraIngles = Console.ReadLine().ToLower(); // Lee la palabra en inglés y la convierte a minúsculas.
+        Console.Write("Ingrese la traducción en español: ");
+        string palabraEspanol = Console.ReadLine().ToLower(); // Lee la traducción en español y la convierte a minúsculas.
+
+        // Verificar si la palabra ya existe en el diccionario
+        if (!diccionario.ContainsKey(palabraIngles)) // Verifica si la palabra en inglés no está ya en el diccionario.
+        {
+            diccionario.Add(palabraIngles, palabraEspanol); // Agrega la nueva palabra al diccionario.
+            Console.WriteLine("Palabra agregada correctamente."); // Muestra un mensaje de éxito.
+        }
+        else
+        {
+            Console.WriteLine("La palabra ya existe en el diccionario."); // Muestra un mensaje si la palabra ya existe.
+        }
+    }
+}
+
+// Fin del programa.
+
+// Universidad Estatal Amazónica.
+
+// Andrés Ponce M.
