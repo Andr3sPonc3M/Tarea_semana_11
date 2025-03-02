@@ -37,12 +37,16 @@ class Program // Define una clase llamada Program.
         while (true) // Inicia un bucle infinito.
         {
             // Mostrar el menú de opciones con separaciones para estética
-            Console.WriteLine("\nMENU");
+            Console.WriteLine("\nLA UNIVERSIDAD ESTATAL AMAZONICA PRESENTA:");
+            Console.WriteLine("UN PROGRAMA DE ANDRES PONCE M.");
+            Console.WriteLine("TAREA SEMANA 11");
+            Console.WriteLine("ESTRUCTURA DE DATOS");
+            Console.WriteLine("\n\nOPCIONES:");
             Console.WriteLine("\n=======================================================");
-            Console.WriteLine("1. Traducir una frase");
-            Console.WriteLine("2. Ingresar mas palabras al diccionario");
-            Console.WriteLine("0. Salir");
-            Console.Write("\nSeleccione una opcion: ");
+            Console.WriteLine("\n1. INGRESE LA FRASE QUE DESEA TRADUCIR");
+            Console.WriteLine("2. INGRESE UNA NUEVA PALABRA AL DICCIONARIO");
+            Console.WriteLine("0. YA SE ABURRIO? SALGA DEL PROGRAMA");
+            Console.Write("\n\nQUE QUEREMOS HACER: ");
             string opcion = Console.ReadLine(); // Leer la opción seleccionada por el usuario.
 
             // Evaluar la opción seleccionada
@@ -55,10 +59,10 @@ class Program // Define una clase llamada Program.
                     AgregarPalabra(diccionario); // Llama a la función para agregar una palabra al diccionario.
                     break;
                 case "0":
-                    Console.WriteLine("Saliendo del programa..."); // Muestra un mensaje de salida.
+                    Console.WriteLine("VUELVA PRONTO"); // Muestra un mensaje de salida.
                     return; // Sale del programa.
                 default:
-                    Console.WriteLine("Opción no válida. Intente de nuevo."); // Muestra un mensaje para opciones no válidas.
+                    Console.WriteLine("NOFS ASI INTENTE DE NUEVO 1, 2, 0 NO HAY MAS OPCIONES."); // Muestra un mensaje para opciones no válidas.
                     break;
             }
         }
@@ -67,7 +71,7 @@ class Program // Define una clase llamada Program.
     // Función para traducir una frase
     static void TraducirFrase(Dictionary<string, string> diccionario) // Define la función TraducirFrase que recibe un diccionario.
     {
-        Console.Write("Ingrese la frase: ");
+        Console.Write("INGRESE LA FRASE DESEADA: ");
         string frase = Console.ReadLine().ToLower(); // Lee la frase y la convierte a minúsculas.
         string[] palabras = frase.Split(' '); // Divide la frase en un array de palabras.
         string fraseTraducida = ""; // Declara una variable para almacenar la frase traducida.
@@ -106,9 +110,9 @@ class Program // Define una clase llamada Program.
     // Función para agregar una nueva palabra al diccionario
     static void AgregarPalabra(Dictionary<string, string> diccionario) // Define la función AgregarPalabra que recibe un diccionario.
     {
-        Console.Write("Ingrese la palabra en inglés: ");
+        Console.Write("INGRESE LA PALABRA EN INGLES: ");
         string palabraIngles = Console.ReadLine().ToLower(); // Lee la palabra en inglés y la convierte a minúsculas.
-        Console.Write("Ingrese la traducción en español: ");
+        Console.Write("INGRESE LA PALABRA EN ESPAÑOL: ");
         string palabraEspanol = Console.ReadLine().ToLower(); // Lee la traducción en español y la convierte a minúsculas.
 
         // Verificar si la palabra ya existe en el diccionario
@@ -119,7 +123,7 @@ class Program // Define una clase llamada Program.
         }
         else
         {
-            Console.WriteLine("La palabra ya existe en el diccionario."); // Muestra un mensaje si la palabra ya existe.
+            Console.WriteLine("PALABRA DUPLICADA, INTENTE CON OTRA."); // Muestra un mensaje si la palabra ya existe.
         }
     }
 }
